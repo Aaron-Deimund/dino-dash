@@ -1,0 +1,58 @@
+:root{
+    --board-height: 400px;
+    --board-width: 900px;
+
+    --character-height: 100px;
+    --character-width: 40px;
+    --character-color: red;
+    --character-bottom: 0px;
+    --character-left: 0px;
+
+    --block-height: 40px;
+    --block-width: 10px;
+    --block-color: blue;
+    --block-bottom: 0px;
+    --block-left: calc(var(--board-width) - var(--character-width));
+}
+#game{
+    width: var(--board-width);
+    height: var(--board-height);
+    border: 1px solid black;
+    position: relative;
+    overflow: hidden;
+}
+
+@keyframes character-jump {
+    0%{bottom: var(--character-bottom)}
+    50%{bottom: calc(15px + var(--block-height))}
+    100%{bottom: var(--character-bottom)}
+}
+
+#character{
+    position: absolute;
+    height: var(--character-height);
+    width: var(--character-width);
+    background-color: var(--character-color);
+    bottom: var(--character-bottom);
+    left: var(--character-left);
+}
+
+.jumping{
+    animation: character-jump 750ms infinite cubic-bezier(0, 2, 0.5, 1.25)
+}
+
+@keyframes block-animation {
+    0%{left: calc( 100px + var(--board-width));}
+    100%{left: calc(-100px - var(--character-width));}
+    
+}
+
+#block{
+    position: absolute;
+    height: var(--block-height);
+    width: var(--block-width);
+    background-color: var(--block-color);
+    bottom: var(--block-bottom);
+    left: var(--block-left);
+    animation: block-animation 3s infinite linear;
+}
