@@ -13,7 +13,34 @@
     --block-color: blue;
     --block-bottom: 0px;
     --block-left: calc(var(--board-width) - var(--character-width));
+
+    --character-jump-duration: 750ms;
 }
+
+dialog{
+    width:600px;
+    height:300px;
+}
+
+p{
+    font-family: sans-serif;
+    font-size: 2rem;
+}
+
+button{
+    height: 80px;
+    width: 400px;
+    font-size: 2rem;
+}
+
+.dialog-inner{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
 #game{
     width: var(--board-width);
     height: var(--board-height);
@@ -38,12 +65,12 @@
 }
 
 .jumping{
-    animation: character-jump 750ms infinite cubic-bezier(0, 2, 0.5, 1.25)
+    animation: character-jump var(--character-jump-duration) cubic-bezier(0, 2, 0.5, 1.25)
 }
 
 @keyframes block-animation {
     0%{left: calc( 100px + var(--board-width));}
-    100%{left: calc(-100px - var(--character-width));}
+    100%{left: calc(-100px - var(--block-width));}
     
 }
 
@@ -53,6 +80,11 @@
     width: var(--block-width);
     background-color: var(--block-color);
     bottom: var(--block-bottom);
-    left: var(--block-left);
+    left: calc(-1 * var(--block-left));
+    display: none;
+}
+
+#block.block-advancing{
+    display: block;
     animation: block-animation 3s infinite linear;
 }
